@@ -244,7 +244,7 @@ The timing is perfect. Everyone is building AI agents right now. Almost nobody i
 
 ```bash
 # Clone and install
-git clone https://github.com/agentbhavya/synthesishack
+git clone https://github.com/tpgGirls/synthesishack
 cd synthesishack && npm install && npm run build
 
 # Add to your MCP config (Claude Desktop: ~/Library/Application Support/Claude/claude_desktop_config.json)
@@ -262,6 +262,8 @@ cd synthesishack && npm install && npm run build
 ```
 
 ### Web Dashboard
+
+**Live demo:** https://frontend-cyan-nine-88.vercel.app
 
 ```bash
 cd frontend && npm install && npm run dev
