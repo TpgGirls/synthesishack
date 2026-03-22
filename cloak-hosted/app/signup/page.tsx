@@ -49,6 +49,31 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen hero-bg flex items-center justify-center p-6">
       <div className="w-full max-w-md">
+        {/* Back button */}
+        <button
+          type="button"
+          onClick={() => window.history.back()}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            fontFamily: "Cinzel,serif",
+            fontSize: "0.65rem",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--color-cream-dim)",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            marginBottom: "1.5rem",
+            opacity: 0.6,
+            transition: "opacity 0.2s",
+          }}
+          onMouseOver={e => (e.currentTarget.style.opacity = "1")}
+          onMouseOut={e => (e.currentTarget.style.opacity = "0.6")}
+        >
+          ← Back
+        </button>
         <div className="text-center mb-8">
           <div className="divider max-w-xs mx-auto mb-4">
             <span>◆</span>

@@ -73,12 +73,12 @@ export default function Dashboard() {
       {/* Nav */}
       <nav style={{background:"rgba(17,14,9,0.9)",borderBottom:"1px solid rgba(107,81,40,0.4)",backdropFilter:"blur(12px)",position:"sticky",top:0,zIndex:40}}>
         <div style={{maxWidth:"72rem",margin:"0 auto",padding:"0 1.5rem",display:"flex",alignItems:"center",justifyContent:"space-between",height:"3.5rem"}}>
-          <div style={{display:"flex",alignItems:"center",gap:"0.5rem"}}>
+          <a href="/" style={{display:"flex",alignItems:"center",gap:"0.5rem",textDecoration:"none",cursor:"pointer"}}>
             <Shield size={16} style={{color:"var(--color-gold)"}} />
             <span style={{fontFamily:"Cinzel,serif",fontSize:"0.875rem",letterSpacing:"0.15em",color:"var(--color-cream)",fontWeight:700}}>CLOAK</span>
             <span style={{color:"var(--color-ornament)",margin:"0 0.5rem"}}>·</span>
             <span style={{fontFamily:"EB Garamond,serif",fontSize:"0.8rem",color:"var(--color-cream-dim)"}}>Agent Vault</span>
-          </div>
+          </a>
           <div style={{display:"flex",gap:"0.5rem"}}>
             {(["vault","execute","audit","oracle"] as Tab[]).map(t => (
               <button key={t} onClick={() => setTab(t)} style={{fontFamily:"Cinzel,serif",fontSize:"0.65rem",letterSpacing:"0.15em",textTransform:"uppercase",padding:"0.375rem 0.875rem",border:`1px solid ${tab===t?"var(--color-gold)":"transparent"}`,background:tab===t?"var(--color-gold-dim)":"transparent",color:tab===t?"var(--color-gold)":"var(--color-cream-dim)",borderRadius:"2px",cursor:"pointer",transition:"all 0.2s"}}>
