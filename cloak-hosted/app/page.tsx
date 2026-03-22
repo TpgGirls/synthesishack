@@ -1,16 +1,16 @@
 import Link from "next/link";
-import { Shield, Lock, Eye, Zap, Github, CreditCard, Cpu, Fingerprint } from "lucide-react";
+import { Shield, Lock, Eye, Zap, Github, Cpu, Fingerprint } from "lucide-react";
 
 const HOW_IT_WORKS = [
   { step: "I", title: "Seal your keys", body: "Paste your API credentials once. They are encrypted with AES-256-GCM before storage — your agent never sees the raw secret again." },
-  { step: "II", title: "Invoke actions", body: "Instruct your AI agent to call GitHub, Slack, Stripe, Venice, or verify Self identity. Cloak decrypts in-memory and returns only the result." },
+  { step: "II", title: "Invoke actions", body: "Instruct your AI agent to call GitHub, Slack, Venice, or verify Self identity. Cloak decrypts in-memory and returns only the result." },
   { step: "III", title: "Review the Chronicle", body: "Every invocation is logged — service, action, outcome — so you maintain a complete audit trail without storing credentials in history." },
 ];
 
 const SERVICES = [
   { icon: Github, name: "GitHub", desc: "List repos, create issues", color: "var(--color-cream)" },
   { icon: Zap, name: "Slack", desc: "Post messages, list channels", color: "#c084fc" },
-  { icon: CreditCard, name: "Stripe", desc: "Check balance, list customers", color: "#93c5fd" },
+
   { icon: Cpu, name: "Venice AI", desc: "Private AI chat & image gen", color: "#f97316" },
   { icon: Fingerprint, name: "Self Protocol", desc: "ZK identity verification", color: "var(--color-gold)" },
 ];
@@ -47,7 +47,7 @@ export default function Home() {
             <span style={{ color: "var(--color-gold)" }}>Your secrets stay sealed.</span>
           </h1>
           <p style={{ fontFamily: "EB Garamond,serif", fontSize: "1.25rem", fontStyle: "italic", color: "var(--color-cream-dim)", lineHeight: 1.7, marginBottom: "2.5rem", maxWidth: "36rem", margin: "0 auto 2.5rem" }}>
-            Cloak lets AI agents invoke real APIs on your behalf — GitHub, Slack, Stripe — without ever reading your credentials. Keys are sealed before storage and never appear in model context.
+            Cloak lets AI agents invoke real APIs on your behalf — GitHub, Slack, Venice — without ever reading your credentials. Keys are sealed before storage and never appear in model context.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/signup" className="btn-primary" style={{ textDecoration: "none", padding: "0.75rem 2rem", fontSize: "0.75rem" }}>

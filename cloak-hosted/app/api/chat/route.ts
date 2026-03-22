@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
   const systemPrompt =
     connectedServices.length > 0
       ? `You are a private AI agent (powered by Venice AI) with access to the user's connected services: ${connectedServices.join(", ")}. Use the available tools to fulfill the user's requests. After completing tasks, provide a concise natural language summary of what you did and the results. Never mention raw API keys or tokens.`
-      : `You are a private AI assistant powered by Venice AI. The user has not yet connected any services. Help them understand what Cloak can do: they can store API keys for GitHub, Slack, Stripe, and more in the Vault tab, then ask you to take actions on their behalf.`;
+      : `You are a private AI assistant powered by Venice AI. The user has not yet connected any services. Help them understand what Cloak can do: they can store API keys for GitHub, Slack, Venice, and more in the Vault tab, then ask you to take actions on their behalf.`;
 
   // Build the message array for Venice
   const loopMessages: VeniceMessage[] = [

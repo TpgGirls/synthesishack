@@ -17,12 +17,14 @@ export default function SignupPage() {
   const router = useRouter();
   const [step, setStep] = useState<"verify" | "create">("verify");
   const [selfUserId, setSelfUserId] = useState("");
+  const [zkVerified, setZkVerified] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   function handleVerified(id: string) {
+    setZkVerified(!id.startsWith("bypass-"));
     setSelfUserId(id);
     setStep("create");
   }
@@ -146,6 +148,33 @@ export default function SignupPage() {
                 </p>
               </div>
               <SelfVerification onVerified={handleVerified} />
+              {/* Bypass option */}
+              <div style={{ textAlign: "center", paddingTop: "0.5rem", borderTop: "1px solid rgba(107,81,40,0.2)", marginTop: "0.5rem" }}>
+                <p style={{ fontFamily: "EB Garamond,serif", fontSize: "0.8rem", color: "var(--color-cream-dim)", marginBottom: "0.5rem" }}>
+                  Don&apos;t have the Self app?
+                </p>
+                <button
+                  type="button"
+                  onClick={() => handleVerified("bypass-" + Math.random().toString(36).slice(2, 10))}
+                  style={{
+                    fontFamily: "Cinzel,serif",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    color: "var(--color-cream-dim)",
+                    background: "transparent",
+                    border: "1px solid rgba(107,81,40,0.4)",
+                    borderRadius: "2px",
+                    padding: "0.375rem 1rem",
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseOver={e => (e.currentTarget.style.borderColor = "var(--color-gold)")}
+                  onMouseOut={e => (e.currentTarget.style.borderColor = "rgba(107,81,40,0.4)")}
+                >
+                  Skip — Sign up with email only
+                </button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSignup} className="space-y-5">
@@ -154,8 +183,13 @@ export default function SignupPage() {
                   className="font-display text-xs uppercase tracking-widest"
                   style={{ color: "var(--color-gold)" }}
                 >
-                  Identity Verified ✓
+                  {zkVerified ? "ZK Identity Verified ✓" : "Email Signup"}
                 </p>
+                {!zkVerified && (
+                  <p style={{ fontFamily: "EB Garamond,serif", fontSize: "0.78rem", color: "var(--color-cream-dim)", marginTop: "0.25rem" }}>
+                    No ZK proof — you can add Self verification later.
+                  </p>
+                )}
               </div>
               <div>
                 <label className="label">Email</label>

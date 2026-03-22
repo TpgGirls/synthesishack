@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, RefreshCw, Play, ArrowLeft, CheckCircle, XCircle, Shield, Eye, EyeOff, Github, Zap, CreditCard, Server } from "lucide-react";
+import { Plus, Trash2, RefreshCw, Play, ArrowLeft, CheckCircle, XCircle, Shield, Eye, EyeOff, Github, Zap, Server } from "lucide-react";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
@@ -14,8 +14,8 @@ interface ActionDef { id: string; label: string; params: string[]; }
 interface AuditEntry { ts: string; service: string; action: string; success: boolean; }
 interface ExecResult { success: boolean; status?: number; data?: unknown; error?: string; }
 
-const SERVICE_ICONS: Record<string, React.FC<{size?:number;className?:string}>> = { github: Github, slack: Zap, stripe: CreditCard, venice: Eye, self: Shield };
-const SERVICE_COLORS: Record<string, string> = { github: "var(--color-cream)", slack: "#c084fc", stripe: "#93c5fd", venice: "#f97316", self: "var(--color-gold)" };
+const SERVICE_ICONS: Record<string, React.FC<{size?:number;className?:string}>> = { github: Github, slack: Zap, venice: Eye, self: Shield };
+const SERVICE_COLORS: Record<string, string> = { github: "var(--color-cream)", slack: "#c084fc", venice: "#f97316", self: "var(--color-gold)" };
 
 function ServiceIcon({ name }: { name: string }) {
   const Icon = SERVICE_ICONS[name] ?? Server;
@@ -169,7 +169,7 @@ function AddModal({ token, onClose, onSaved }: { token: string; onClose: ()=>voi
         <div className="divider" style={{marginBottom:"1.5rem"}}><span>◆</span><span style={{fontFamily:"Cinzel,serif",fontSize:"0.7rem",letterSpacing:"0.25em",color:"var(--color-gold)",textTransform:"uppercase"}}>Seal a Secret</span><span>◆</span></div>
         <p style={{fontFamily:"EB Garamond,serif",fontStyle:"italic",color:"var(--color-cream-dim)",fontSize:"0.9rem",marginBottom:"1.5rem",textAlign:"center"}}>The key will be encrypted before it ever reaches storage.</p>
         <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:"1.25rem"}}>
-          <div><label className="label">Service Name</label><input className="input" placeholder="github · slack · stripe" value={service} onChange={e=>setService(e.target.value)} autoFocus /></div>
+          <div><label className="label">Service Name</label><input className="input" placeholder="github · slack · venice · self" value={service} onChange={e=>setService(e.target.value)} autoFocus /></div>
           <div><label className="label">API Key / Secret</label>
             <div style={{position:"relative"}}>
               <input className="input" type={show?"text":"password"} style={{paddingRight:"2.5rem"}} placeholder="sk-… · ghp_… · xoxb-…" value={credential} onChange={e=>setCredential(e.target.value)} />
@@ -336,7 +336,7 @@ function OracleTab({ token, hasVeniceKey }: { token: string; hasVeniceKey: boole
               <div style={{ color: "var(--color-gold)", fontSize: "3rem", fontFamily: "Cinzel,serif" }}>✦</div>
               <p style={{ fontFamily: "Cinzel,serif", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.2em", color: "var(--color-cream-dim)" }}>Ask the Oracle to act on your behalf</p>
               <p style={{ fontFamily: "EB Garamond,serif", fontStyle: "italic", color: "var(--color-cream-dim)", fontSize: "0.85rem" }}>
-                &ldquo;List my GitHub repos&rdquo; &middot; &ldquo;Post a message to Slack&rdquo; &middot; &ldquo;Check my Stripe balance&rdquo;
+                &ldquo;List my GitHub repos&rdquo; &middot; &ldquo;Post a message to Slack&rdquo; &middot; &ldquo;Create a GitHub issue&rdquo;
               </p>
             </div>
           )}
