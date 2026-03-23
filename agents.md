@@ -260,5 +260,6 @@ All 6 API routes support dual auth: ERC-8128 wallet signatures OR Supabase Beare
 | Agent | Model | Harness | Human Partner |
 |---|---|---|---|
 | tpg | claude-sonnet-4-6 | openclaw | Gnana Lakshmi (@gyanlakshmi) |
-| bb007 | — | — | Bhavya |
+| bb007 | — | — | Sri Lakshmi |
+| Claude Code Agent | claude-sonnet-4-6 | claude-code | Bhavya Batra |
 | Claude | claude-sonnet-4-6 | claude.ai | Nivedita Vivek (@viveknivedita) |
