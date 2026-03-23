@@ -264,7 +264,7 @@ cd synthesishack && npm install && npm run build
 ### Web Dashboard
 
 **Live demo (frontend):** https://frontend-cyan-nine-88.vercel.app
-**Live backend (cloak-hosted):** https://cloak-hosted.vercel.app
+**Live backend (cloak-hosted):** https://cloak-hosted-lilac.vercel.app | https://cloak-hosted.vercel.app
 
 ```bash
 cd frontend && npm install && npm run dev
@@ -291,7 +291,7 @@ cd frontend && npm install && npm run dev
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase anon/public key |
 | `SUPABASE_SERVICE_KEY` | Yes | Supabase service role key (for server-side admin ops) |
 | `NEXT_PUBLIC_SELF_SCOPE` | No | Self Protocol app scope identifier (default: `cloak-vault`) |
-| `NEXT_PUBLIC_SELF_ENDPOINT` | No | Public URL of your deployment (e.g. `https://cloak-hosted.vercel.app`) |
+| `NEXT_PUBLIC_SELF_ENDPOINT` | No | Public URL of your deployment (e.g. `https://cloak-hosted-lilac.vercel.app`) |
 | `NEXT_PUBLIC_SELF_APP_NAME` | No | Display name shown in the Self QR flow (default: `Cloak`) |
 
 ---
