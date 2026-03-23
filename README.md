@@ -263,7 +263,8 @@ cd synthesishack && npm install && npm run build
 
 ### Web Dashboard
 
-**Live demo:** https://frontend-cyan-nine-88.vercel.app
+**Live demo (frontend):** https://frontend-cyan-nine-88.vercel.app
+**Live backend (cloak-hosted):** https://cloak-hosted.vercel.app
 
 ```bash
 cd frontend && npm install && npm run dev
@@ -273,11 +274,25 @@ cd frontend && npm install && npm run dev
 
 ### Environment Variables
 
+**MCP server (`src/`)**
+
 | Variable | Required | Description |
 |---|---|---|
 | `CLOAK_MASTER_SECRET` | Yes | Master passphrase for vault encryption (min 16 chars) |
 | `CLOAK_VAULT_PATH` | No | Custom path for vault file (default: `~/.cloak/vault.json`) |
 | `SELF_STRICT_MODE` | No | Set `true` to require verified Self Agent ID for all executions |
+
+**Hosted service (`cloak-hosted/`) — Vercel + Supabase**
+
+| Variable | Required | Description |
+|---|---|---|
+| `CLOAK_SERVER_SECRET` | Yes | 32+ char secret used to derive per-user encryption keys |
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Supabase project URL (Settings → API → Project URL) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase anon/public key |
+| `SUPABASE_SERVICE_KEY` | Yes | Supabase service role key (for server-side admin ops) |
+| `NEXT_PUBLIC_SELF_SCOPE` | No | Self Protocol app scope identifier (default: `cloak-vault`) |
+| `NEXT_PUBLIC_SELF_ENDPOINT` | No | Public URL of your deployment (e.g. `https://cloak-hosted.vercel.app`) |
+| `NEXT_PUBLIC_SELF_APP_NAME` | No | Display name shown in the Self QR flow (default: `Cloak`) |
 
 ---
 
