@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
 
     if (result.isValidDetails.isValid) {
       return NextResponse.json({
+        result: true,
         status: "success",
         verified: true,
         credentialSubject: result.discloseOutput,
@@ -44,6 +45,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({
+      result: false,
       status: "error",
       verified: false,
       reason: "Proof verification failed",
