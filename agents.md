@@ -1,6 +1,6 @@
 # AGENTS.md — Cloak
 
-Cloak is a private AI agent vault. It lets AI agents take authorized actions on external services — GitHub, Stripe, Slack, Venice AI — without ever seeing the API keys they need. Credentials are stored AES-256-GCM encrypted per user. The AI brain (Venice AI) orchestrates which actions to take via natural language. The credential never leaves Cloak; only the result reaches the agent.
+Cloak is a private AI agent vault. It lets AI agents take authorized actions on external services — GitHub, Slack, Venice AI — without ever seeing the API keys they need. Credentials are stored AES-256-GCM encrypted per user. The AI brain (Venice AI) orchestrates which actions to take via natural language. The credential never leaves Cloak; only the result reaches the agent.
 
 **Hackathon:** The Synthesis (March 2026)
 **Repo:** https://github.com/TpgGirls/synthesishack
@@ -45,8 +45,7 @@ cloak-hosted/           ← Next.js API routes on Vercel
         │
         ├── Venice AI   ← Brain: decides which tools to call (llama-3.3-70b)
         ├── GitHub API  ← list repos, create issues
-        ├── Slack API   ← post messages, list channels
-        └── Stripe API  ← get balance, list customers
+        └── Slack API   ← post messages, list channels
 ```
 
 ---
@@ -147,7 +146,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 |---|---|---|
 | `VITE_SUPABASE_URL` | Yes | Same Supabase project URL |
 | `VITE_SUPABASE_ANON_KEY` | Yes | Same Supabase anon key |
-| `VITE_API_BASE` | No | Full URL of cloak-hosted for production (e.g. `https://cloak-hosted.vercel.app/api`) |
+| `VITE_API_BASE` | No | Full URL of cloak-hosted for production (e.g. `https://cloak-hosted-lilac.vercel.app/api`) |
 
 ### src/ MCP server
 
@@ -165,7 +164,6 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 |---|---|---|
 | **GitHub** | get_user, list_repos, create_issue | Personal Access Token |
 | **Slack** | list_channels, post_message | Bot Token (xoxb-) |
-| **Stripe** | get_balance, list_customers | Secret Key (sk_) |
 | **Venice AI** | chat, image_gen, list_models | API Key |
 | **Self Protocol** | verify_proof, check_nullifier | App Scope string |
 
@@ -199,12 +197,18 @@ Venice is the **orchestration brain** in the Oracle tab. Flow:
 
 Venice also works as a **direct vault service**: store a Venice API key and use the Execute tab to call `chat`, `image_gen`, or `list_models` manually.
 
-### Self Protocol ✅ (executor layer)
-Self Protocol is implemented in the executor as a vault service:
-- `verify_proof` — POST a ZK proof (from Self mobile app) to `api.self.xyz/v1/verify`
-- `check_nullifier` — verify a nullifier hasn't been used
+### Self Protocol ✅
+Self Protocol is integrated at two layers:
 
-Full identity gating (`SELF_STRICT_MODE`) — requiring Self verification before any `execute_with_credential` call — is the next step.
+**Signup / ZK identity verification (live)**
+- Users verify their identity via Self Protocol ZK proof on the `/signup` page
+- QR code rendered via `@selfxyz/qrcode`, proof verified server-side via `SelfBackendVerifier`
+- Verified `self_user_id` stored in Supabase user metadata at account creation
+- Endpoint: `POST /api/self/verify` — returns `{ result: true, credentialSubject: {...} }`
+
+**Executor layer**
+- `verify_proof` — POST a ZK proof to `api.self.xyz/v1/verify` via the vault
+- `check_nullifier` — verify a nullifier hasn't been used
 
 ### Slice ERC-8128 ✅
 Slice is implemented as the **AI agent authentication layer** — all API routes in `cloak-hosted` now accept wallet-signed HTTP requests in addition to Supabase JWTs.
@@ -215,7 +219,7 @@ How it works:
 3. The wallet address (lowercased) becomes the `userId` for vault encryption
 4. Nonces are stored in-memory with 5-minute TTL to prevent replay attacks
 
-Discovery document live at: `https://cloak-hosted.vercel.app/.well-known/erc8128`
+Discovery document live at: `https://cloak-hosted-lilac.vercel.app/.well-known/erc8128`
 
 All 6 API routes support dual auth: ERC-8128 wallet signatures OR Supabase Bearer token.
 

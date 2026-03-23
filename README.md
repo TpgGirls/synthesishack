@@ -102,7 +102,6 @@ Credentials are encrypted at rest using AES-256-GCM with per-credential salts. K
 
 - **GitHub** — get user, list repos, create issues
 - **Slack** — list channels, post messages
-- **Stripe** — get balance, list customers
 
 ### Web Dashboard
 
@@ -245,6 +244,20 @@ The timing is perfect. Everyone is building AI agents right now. Almost nobody i
 | Web auth | Slice ERC-8128 |
 | Dashboard | React 18, Vite, Tailwind CSS |
 | API server | Express, TypeScript |
+
+---
+
+## For Judges — Try It in 2 Minutes
+
+**Live app:** https://cloak-hosted-lilac.vercel.app
+
+1. Go to `/signup` — scan the QR code with the [Self app](https://self.xyz) to verify your identity with ZK proof, or skip and sign up with email
+2. On the dashboard, go to **Vault** → add a GitHub or Slack API key
+3. Go to **Execute** → invoke an action (e.g. `list_repos`) — the key is never returned to your browser
+4. Go to **Oracle** → type `"list my GitHub repos and summarize them"` — Venice AI orchestrates the call without seeing your key
+5. Go to **Audit** → every action logged, no credential values ever stored in plaintext
+
+The ERC-8128 discovery doc is live at: https://cloak-hosted-lilac.vercel.app/.well-known/erc8128
 
 ---
 
